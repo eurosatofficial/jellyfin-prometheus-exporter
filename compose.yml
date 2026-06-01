@@ -1,0 +1,15 @@
+services:
+  jellyfin-exporter:
+    image: python:3.12-slim
+    container_name: jellyfin-exporter
+    restart: unless-stopped
+    ports:
+      - "9594:9594"
+    volumes:
+      - /opt/jellyfin-exporter/exporter.py:/app/exporter.py:ro
+    environment:
+      JELLYFIN_URL: "http://jellyfin.ip:8096"
+      JELLYFIN_API_KEY: "DEIN_API_KEY_HIER"
+    command: >
+      sh -c "pip install flask requests prometheus-client &&
+             python /app/exporter.py"

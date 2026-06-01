@@ -1,0 +1,4 @@
+- job_name: "jellyfin-exporter"
+  static_configs:
+    - targets:
+        - "IP-DEINES-DOCKER-CT:9594"
