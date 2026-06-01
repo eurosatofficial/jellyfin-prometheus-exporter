@@ -1,3 +1,8 @@
+![License](https://img.shields.io/badge/license-Apache%202.0-blue)
+![Python](https://img.shields.io/badge/python-3.10%2B-blue)
+![Jellyfin](https://img.shields.io/badge/Jellyfin-Compatible-00A4DC)
+![Grafana](https://img.shields.io/badge/Grafana-Dashboard-orange)
+
 # Jellyfin Prometheus Exporter + Grafana Dashboard
 
 A small Prometheus exporter for Jellyfin that reads data from the Jellyfin API and exposes it as Prometheus metrics.
