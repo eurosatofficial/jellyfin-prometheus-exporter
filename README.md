@@ -392,9 +392,47 @@ The exporter only needs access to the Jellyfin API.
 
 ## Troubleshooting
 
+### Jellyfin metrics are disabled
+
+If Prometheus is scraping the exporter but most Jellyfin metrics remain at `0`, Jellyfin metrics are probably not enabled.
+
+Open your Jellyfin `system.xml` configuration file and ensure the following setting is present:
+
+```xml
+<EnableMetrics>true</EnableMetrics>
+```
+
+Typical locations:
+
+**Linux**
+
+```text
+/var/lib/jellyfin/config/system.xml
+```
+
+**Docker**
+
+```text
+/config/config/system.xml
+```
+
+After enabling metrics:
+
+1. Save the file
+2. Restart Jellyfin
+3. Verify the metrics endpoint is available:
+
+```text
+http://JELLYFIN-SERVER:8096/metrics
+```
+
+The exporter relies on Jellyfin's native metrics endpoint. If metrics are disabled, several dashboard panels will remain empty.
+
+---
+
 ### Exporter starts but `jellyfin_up` is `0`
 
-Check:
+Check the exporter logs:
 
 ```bash
 docker logs jellyfin-exporter
@@ -402,47 +440,119 @@ docker logs jellyfin-exporter
 
 Common causes:
 
-- Wrong `JELLYFIN_URL`
-- Wrong API key
-- Jellyfin not reachable from Docker host
-- Firewall or VLAN routing issue
+- Incorrect `JELLYFIN_URL`
+- Invalid API key
+- Jellyfin is unreachable from the exporter container
+- Firewall restrictions
+- VLAN routing issues
+- Reverse proxy misconfiguration
+
+Verify that the Jellyfin API is reachable from the exporter host.
+
+---
 
 ### Prometheus target is DOWN
 
-Check whether the exporter is reachable from the Prometheus host:
+First verify that the exporter is running and exposing metrics:
 
 ```bash
 curl http://YOUR-DOCKER-HOST:9594/metrics
 ```
 
-If this works, check the Prometheus target address.
+If metrics are returned, check your Prometheus configuration:
+
+```yaml
+scrape_configs:
+  - job_name: "jellyfin-exporter"
+    static_configs:
+      - targets:
+          - YOUR-DOCKER-HOST:9594
+```
+
+Also verify the target status in Prometheus:
+
+```text
+http://PROMETHEUS-SERVER:9090/targets
+```
+
+The exporter should show an **UP** status.
+
+---
 
 ### Grafana shows no data
 
-Check Prometheus first:
+First check whether Prometheus is receiving data:
 
 ```promql
 jellyfin_up
 ```
 
-If Prometheus has data but Grafana does not:
+If data is returned but Grafana panels remain empty:
 
-- Check selected Prometheus datasource
+- Verify the correct Prometheus datasource is selected
 - Refresh dashboard variables
-- Make sure you imported the dashboard made for this exporter
+- Check the selected time range
+- Ensure you imported the dashboard included with this project
+- Confirm the Prometheus datasource is healthy
 
-### Active streams show 0
+---
 
-That is normal when nobody is actively playing media.
+### Active streams always show `0`
 
-Start playback in Jellyfin and refresh the dashboard.
+This metric only increases while media is actively being played.
 
-### Transcodes show 0
+To test:
 
-That usually means the stream is Direct Play / Direct Stream.
+1. Start playback in Jellyfin
+2. Wait a few seconds for metrics to update
+3. Refresh the dashboard
 
-Start playback on a client that requires transcoding to test this.
+If no active playback exists, a value of `0` is expected.
 
+---
+
+### Transcodes always show `0`
+
+This usually indicates that playback is occurring via:
+
+- Direct Play
+- Direct Stream
+
+and therefore no transcoding is required.
+
+To verify transcoding metrics:
+
+1. Start playback on a device that requires transcoding
+2. Force a lower bitrate or incompatible codec
+3. Refresh the dashboard
+
+The metric should increase once Jellyfin begins transcoding.
+
+---
+
+### Dashboard panels are empty after import
+
+Verify that:
+
+- Prometheus is configured correctly
+- The exporter is running
+- Jellyfin metrics are enabled
+- The correct Prometheus datasource is selected
+- The dashboard was imported without modification
+
+You can verify the full metric chain using:
+
+```text
+Jellyfin
+    ↓
+Exporter
+    ↓
+Prometheus
+    ↓
+Grafana
+```
+
+If any component in the chain is unavailable, dashboard panels may remain empty.
 ---
 
 ## Credits
