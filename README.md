@@ -35,6 +35,25 @@ This exporter uses the Jellyfin API to expose media-server-focused metrics, for 
 - Exporter scrape error metrics
 
 ---
+## Screenshots
+
+### Overview Dashboard
+
+![Overview](screenshots/overview.png)
+
+### Active Sessions
+
+![Sessions](screenshots/sessions.png)
+
+### Transcoding Monitoring
+
+![Transcoding](screenshots/transcoding.png)
+
+### Library Statistics
+
+![Library](screenshots/library.png)
+
+---
 
 ## Requirements
 
