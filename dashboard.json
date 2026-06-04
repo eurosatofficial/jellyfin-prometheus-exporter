@@ -574,7 +574,7 @@
           "datasource": {
             "type": "prometheus"
           },
-          "expr": "jellyfin_media_count{instance=~\"$instance\",type=\"MovieCount\"} or vector(0)",
+          "expr": "jellyfin_media_count{instance=~\"$instance\",type=\"MovieCount\"} ",
           "legendFormat": "",
           "refId": "A"
         }
@@ -629,7 +629,7 @@
           "datasource": {
             "type": "prometheus"
           },
-          "expr": "jellyfin_media_count{instance=~\"$instance\",type=\"SeriesCount\"} or vector(0)",
+          "expr": "jellyfin_media_count{instance=~\"$instance\",type=\"SeriesCount\"} ",
           "legendFormat": "",
           "refId": "A"
         }
@@ -684,7 +684,7 @@
           "datasource": {
             "type": "prometheus"
           },
-          "expr": "jellyfin_media_count{instance=~\"$instance\",type=\"EpisodeCount\"} or vector(0)",
+          "expr": "jellyfin_media_count{instance=~\"$instance\",type=\"EpisodeCount\"} ",
           "legendFormat": "",
           "refId": "A"
         }
@@ -739,7 +739,7 @@
           "datasource": {
             "type": "prometheus"
           },
-          "expr": "jellyfin_media_count{instance=~\"$instance\",type=\"ItemCount\"} or vector(0)",
+          "expr": "jellyfin_media_count{instance=~\"$instance\",type=\"ItemCount\"} ",
           "legendFormat": "",
           "refId": "A"
         }
@@ -794,7 +794,7 @@
           "datasource": {
             "type": "prometheus"
           },
-          "expr": "jellyfin_media_count{instance=~\"$instance\",type=\"AlbumCount\"} or vector(0)",
+          "expr": "jellyfin_media_count{instance=~\"$instance\",type=\"AlbumCount\"} ",
           "legendFormat": "",
           "refId": "A"
         }
@@ -849,7 +849,7 @@
           "datasource": {
             "type": "prometheus"
           },
-          "expr": "jellyfin_media_count{instance=~\"$instance\",type=\"ArtistCount\"} or vector(0)",
+          "expr": "jellyfin_media_count{instance=~\"$instance\",type=\"ArtistCount\"} ",
           "legendFormat": "",
           "refId": "A"
         }
@@ -904,7 +904,7 @@
           "datasource": {
             "type": "prometheus"
           },
-          "expr": "jellyfin_media_count{instance=~\"$instance\",type=\"SongCount\"} or vector(0)",
+          "expr": "jellyfin_media_count{instance=~\"$instance\",type=\"SongCount\"} ",
           "legendFormat": "",
           "refId": "A"
         }
@@ -959,7 +959,7 @@
           "datasource": {
             "type": "prometheus"
           },
-          "expr": "jellyfin_media_count{instance=~\"$instance\",type=\"MusicVideoCount\"} or vector(0)",
+          "expr": "jellyfin_media_count{instance=~\"$instance\",type=\"MusicVideoCount\"} ",
           "legendFormat": "",
           "refId": "A"
         }
@@ -1014,7 +1014,7 @@
           "datasource": {
             "type": "prometheus"
           },
-          "expr": "jellyfin_media_count{instance=~\"$instance\",type=\"BoxSetCount\"} or vector(0)",
+          "expr": "jellyfin_media_count{instance=~\"$instance\",type=\"BoxSetCount\"} ",
           "legendFormat": "",
           "refId": "A"
         }
@@ -1069,7 +1069,7 @@
           "datasource": {
             "type": "prometheus"
           },
-          "expr": "jellyfin_media_count{instance=~\"$instance\",type=\"ProgramCount\"} or vector(0)",
+          "expr": "jellyfin_media_count{instance=~\"$instance\",type=\"ProgramCount\"} ",
           "legendFormat": "",
           "refId": "A"
         }
@@ -1124,7 +1124,7 @@
           "datasource": {
             "type": "prometheus"
           },
-          "expr": "jellyfin_media_count{instance=~\"$instance\",type=\"BookCount\"} or vector(0)",
+          "expr": "jellyfin_media_count{instance=~\"$instance\",type=\"BookCount\"} ",
           "legendFormat": "",
           "refId": "A"
         }
@@ -1179,7 +1179,7 @@
           "datasource": {
             "type": "prometheus"
           },
-          "expr": "jellyfin_media_count{instance=~\"$instance\",type=\"TrailerCount\"} or vector(0)",
+          "expr": "jellyfin_media_count{instance=~\"$instance\",type=\"TrailerCount\"} ",
           "legendFormat": "",
           "refId": "A"
         }
